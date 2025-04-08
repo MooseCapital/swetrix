@@ -5,12 +5,10 @@ services:
     restart: always
     depends_on:
       - swetrix-api
-    ports:
-      - '80:3000'
     environment:
       - API_URL=${API_URL}
     healthcheck:
-      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:3000/ping || exit 1"]
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:3050/ping || exit 1"]
       interval: 30s
       start_period: 15s
 
@@ -19,8 +17,6 @@ services:
     image: swetrix/swetrix-api:v3.3.1
     restart: always
     container_name: swetrix-api
-    ports:
-      - '8080:5005'
     environment:
       # Configurable with .env file
       - JWT_ACCESS_TOKEN_SECRET=${JWT_ACCESS_TOKEN_SECRET}
